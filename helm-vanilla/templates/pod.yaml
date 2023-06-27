@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  {{- $podname := print .Values.projectName "-" .Values.pod.name }}
+  name: {{ $podname }}
+  labels:
+  {{- range $key, $value := .Values.pod.labels }}
+    {{ $key}}: {{ $value }}
+  {{- end }}
+spec:
+  {{- $serviceaccountname := print  .Values.projectName "-" .Values.serviceAccount.name }}
+  serviceAccountName: {{ $serviceaccountname }}
+  containers:
+  - name: {{ .Values.pod.containername }}
+    image: {{ .Values.image.repository }}
+    imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+    ports:
+    - containerPort: {{ .Values.pod.containerport }}
+      

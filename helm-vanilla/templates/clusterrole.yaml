@@ -1,0 +1,17 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  {{- $clusterrolename := print .Values.projectName "-" .Values.clusterRole.name }}
+  name: {{ $clusterrolename }}
+rules:
+- apiGroups: [""]
+  resources:
+    {{- range .Values.clusterRole.resources }}
+    - {{ . }}
+    {{- end }}
+  verbs:
+    {{- range .Values.clusterRole.verbs }}
+    - {{ . }}
+    {{- end }}
+

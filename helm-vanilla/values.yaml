@@ -1,0 +1,44 @@
+# Default values for vanilla.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+#
+
+projectName: vanilla
+nameSpace: default
+
+replicaCount: 1
+
+image:
+  repository: pokhriyalindock/gke:v2
+  imagePullPolicy: Always
+
+serviceAccount:
+  name: sac
+
+secretToken:
+  name: token
+
+clusterRole:
+  name: clusterrole
+  resources:
+    - pods
+  verbs:
+    - get
+    - watch
+    - list
+
+clusterRoleBinding:
+  name: clusterrolebinding
+
+pod:
+  name: podflask
+  labels:
+    app: flask-app
+  containername: flask-container
+  containerport: 8080
+
+service:
+  name: service
+  type: NodePort
+  port: 8080
+  targetPort: 8080
