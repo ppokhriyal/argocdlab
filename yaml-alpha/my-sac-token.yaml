@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysac-token
+  namespace: default
+  annotations:
+    kubernetes.io/service-account.name: mysac
+type: kubernetes.oi/service-account-token
